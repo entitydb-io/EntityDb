@@ -48,7 +48,7 @@ jobs:
       - name: Publish to Beta
         run: dotnet nuget push ./**/*.nupkg -s ${{ vars.NUGET_SOURCE }} -k ${{ secrets.NUGET_API_KEY }}
       - name: Packages & Symbols Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: Packages & Symbols
           path: |
@@ -68,7 +68,7 @@ jobs:
           license: ${{ secrets.REPORTGENERATOR_LICENSE }}
           toolpath: 'reportgeneratortool'
       - name: Coverage Report Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: CoverageReport
           path: CoverageReport

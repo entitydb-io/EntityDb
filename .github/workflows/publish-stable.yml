@@ -56,7 +56,7 @@ jobs:
       - name: Publish to Stable
         run: dotnet nuget push ./**/*.nupkg -s ${{ vars.NUGET_SOURCE }} -k ${{ secrets.NUGET_API_KEY }}
       - name: Packages & Symbols Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: Packages & Symbols
           path: |
