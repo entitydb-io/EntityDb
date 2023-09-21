@@ -21,7 +21,7 @@ public record TransactionTimeStampQuery(TimeStamp Gte, TimeStamp Lte, object? Op
     {
         return builder.Combine
         (
-            builder.TransactionTimeStamp(true)
+            builder.SourceTimeStamp(true)
         );
     }
 
@@ -42,7 +42,7 @@ public record TransactionTimeStampQuery(TimeStamp Gte, TimeStamp Lte, object? Op
     {
         return builder.Combine
         (
-            builder.TransactionTimeStamp(true),
+            builder.SourceTimeStamp(true),
             builder.EntityId(true),
             builder.EntityVersionNumber(true)
         );
@@ -61,7 +61,7 @@ public record TransactionTimeStampQuery(TimeStamp Gte, TimeStamp Lte, object? Op
     {
         return builder.Combine
         (
-            builder.TransactionTimeStamp(true),
+            builder.SourceTimeStamp(true),
             builder.EntityId(true),
             builder.EntityVersionNumber(true)
         );
@@ -80,7 +80,7 @@ public record TransactionTimeStampQuery(TimeStamp Gte, TimeStamp Lte, object? Op
     {
         return builder.Combine
         (
-            builder.TransactionTimeStamp(true),
+            builder.SourceTimeStamp(true),
             builder.EntityId(true),
             builder.EntityVersionNumber(true)
         );

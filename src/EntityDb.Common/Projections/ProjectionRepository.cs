@@ -37,7 +37,7 @@ internal sealed class ProjectionRepository<TProjection> : DisposableResourceBase
 
         await foreach (var source in sources)
         {
-            projection = projection.Reduce(source);
+            projection.Mutate(source);
         }
 
         if (!projectionPointer.IsSatisfiedBy(projection.GetVersionNumber()))

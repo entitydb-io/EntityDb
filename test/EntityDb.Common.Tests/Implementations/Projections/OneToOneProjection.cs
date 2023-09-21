@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using EntityDb.Abstractions.Reducers;
+using EntityDb.Abstractions.States;
 using EntityDb.Abstractions.Sources;
 using EntityDb.Abstractions.Transactions;
 using EntityDb.Abstractions.ValueObjects;
@@ -13,11 +13,11 @@ using Pointer = EntityDb.Abstractions.ValueObjects.Pointer;
 
 namespace EntityDb.Common.Tests.Implementations.Projections;
 
-public record OneToOneProjection : IProjection<OneToOneProjection>, ISnapshotWithTestLogic<OneToOneProjection>
+public class OneToOneProjection : IProjection<OneToOneProjection>, ISnapshotWithTestLogic<OneToOneProjection>
 {
-    public required Id Id { get; init; }
-    public TimeStamp LastTransactionAt { get; init; }
-    public VersionNumber VersionNumber { get; init; }
+    public required Id Id { get; set; }
+    public TimeStamp LastTransactionAt { get; set; }
+    public VersionNumber VersionNumber { get; set; }
 
     public static OneToOneProjection Construct(Id projectionId)
     {
@@ -47,32 +47,26 @@ public record OneToOneProjection : IProjection<OneToOneProjection>, ISnapshotWit
         return VersionNumber;
     }
 
-    public OneToOneProjection Reduce(ISource source)
+    public void Mutate(ISource source)
     {
         if (source is not ITransaction transaction)
         {
             throw new NotSupportedException();
         }
 
-        var projection = this with
-        {
-            LastTransactionAt = transaction.TimeStamp,
-        };
+        LastTransactionAt = transaction.TimeStamp;
 
         foreach (var command in transaction.Commands)
         {
-            if (command.Data is not IReducer<OneToOneProjection> reducer)
+            if (command.Data is not IMutator<OneToOneProjection> mutator)
             {
                 continue;
             }
 
-            projection = reducer.Reduce(projection) with
-            {
-                VersionNumber = command.EntityVersionNumber,
-            };
-        }
+            mutator.Mutate(this);
 
-        return projection;
+            VersionNumber = command.EntityVersionNumber;
+        }
     }
 
     public bool ShouldRecord()
@@ -129,7 +123,9 @@ public record OneToOneProjection : IProjection<OneToOneProjection>, ISnapshotWit
 
     public OneToOneProjection WithVersionNumber(VersionNumber versionNumber)
     {
-        return this with { VersionNumber = versionNumber };
+        VersionNumber = versionNumber;
+
+        return this;
     }
 
     public static AsyncLocal<Func<OneToOneProjection, bool>?> ShouldRecordLogic { get; } = new();

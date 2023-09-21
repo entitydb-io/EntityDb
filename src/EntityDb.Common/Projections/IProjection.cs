@@ -12,11 +12,10 @@ namespace EntityDb.Common.Projections;
 public interface IProjection<TProjection> : ISnapshot<TProjection>
 {
     /// <summary>
-    ///     Returns a new <typeparamref name="TProjection" /> that incorporates the transaction command.
+    ///     Incorporates the source into the projection.
     /// </summary>
-    /// <param name="source"></param>
-    /// <returns></returns>
-    TProjection Reduce(ISource source);
+    /// <param name="source">The source of information</param>
+    void Mutate(ISource source);
 
     /// <summary>
     ///     Returns a <see cref="IAgentSignatureQuery" /> that finds transactions that need to be passed to the reducer.

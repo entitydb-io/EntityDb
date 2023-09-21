@@ -14,7 +14,7 @@ internal sealed record GetAgentSignatures(Id[] TransactionIds) : IAgentSignature
 
     public TSort? GetSort<TSort>(IAgentSignatureSortBuilder<TSort> builder)
     {
-        return builder.TransactionTimeStamp(true);
+        return builder.SourceTimeStamp(true);
     }
 
     public int? Skip => null;

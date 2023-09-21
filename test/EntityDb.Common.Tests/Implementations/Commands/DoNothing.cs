@@ -1,20 +1,17 @@
 ﻿using EntityDb.Abstractions.Commands;
 using EntityDb.Abstractions.Leases;
-using EntityDb.Abstractions.Reducers;
+using EntityDb.Abstractions.States;
 using EntityDb.Abstractions.Tags;
 using EntityDb.Common.Tests.Implementations.Entities;
 using EntityDb.Common.Tests.Implementations.Projections;
 
 namespace EntityDb.Common.Tests.Implementations.Commands;
 
-public record DoNothing : IReducer<TestEntity>, IReducer<OneToOneProjection>
+public record DoNothing : IReducer<TestEntity>, IMutator<OneToOneProjection>
 {
-    public OneToOneProjection Reduce(OneToOneProjection projection)
+    public void Mutate(OneToOneProjection projection)
     {
-        return projection with
-        {
-            VersionNumber = projection.VersionNumber.Next()
-        };
+        projection.VersionNumber = projection.VersionNumber.Next();
     }
 
     public TestEntity Reduce(TestEntity entity)

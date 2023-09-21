@@ -6,12 +6,12 @@ namespace EntityDb.SqlDb.Queries.SortBuilders;
 
 internal abstract class SortBuilderBase : ISortBuilder<ISortDefinition>
 {
-    public ISortDefinition TransactionTimeStamp(bool ascending)
+    public ISortDefinition SourceTimeStamp(bool ascending)
     {
         return Sort(ascending, nameof(ITransactionDocument.TransactionTimeStamp));
     }
 
-    public ISortDefinition TransactionId(bool ascending)
+    public ISortDefinition SourceId(bool ascending)
     {
         return Sort(ascending, nameof(ITransactionDocument.TransactionId));
     }

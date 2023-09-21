@@ -17,7 +17,7 @@ public record TransactionIdQuery(Id TransactionId, object? Options = null) : IAg
     {
         return builder.Combine
         (
-            builder.TransactionId(true)
+            builder.SourceId(true)
         );
     }
 
@@ -34,7 +34,7 @@ public record TransactionIdQuery(Id TransactionId, object? Options = null) : IAg
     {
         return builder.Combine
         (
-            builder.TransactionId(true),
+            builder.SourceId(true),
             builder.EntityId(true),
             builder.EntityVersionNumber(true)
         );
@@ -49,7 +49,7 @@ public record TransactionIdQuery(Id TransactionId, object? Options = null) : IAg
     {
         return builder.Combine
         (
-            builder.TransactionId(true),
+            builder.SourceId(true),
             builder.EntityId(true),
             builder.EntityVersionNumber(true)
         );
@@ -64,7 +64,7 @@ public record TransactionIdQuery(Id TransactionId, object? Options = null) : IAg
     {
         return builder.Combine
         (
-            builder.TransactionId(true),
+            builder.SourceId(true),
             builder.EntityId(true),
             builder.EntityVersionNumber(true)
         );

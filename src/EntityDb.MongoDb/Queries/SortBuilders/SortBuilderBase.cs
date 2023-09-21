@@ -9,12 +9,13 @@ internal abstract class SortBuilderBase : BuilderBase, ISortBuilder<SortDefiniti
 {
     private static readonly SortDefinitionBuilder<BsonDocument> SortBuilder = Builders<BsonDocument>.Sort;
 
-    public SortDefinition<BsonDocument> TransactionTimeStamp(bool ascending)
+    public SortDefinition<BsonDocument> SourceTimeStamp(bool ascending)
     {
         return Sort(ascending, nameof(DocumentBase.TransactionTimeStamp));
+
     }
 
-    public SortDefinition<BsonDocument> TransactionId(bool ascending)
+    public SortDefinition<BsonDocument> SourceId(bool ascending)
     {
         return Sort(ascending, nameof(DocumentBase.TransactionId));
     }
