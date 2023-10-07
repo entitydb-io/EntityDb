@@ -14,7 +14,7 @@ public static class HttpContextSeeder
 
         connectionInfoMock
             .SetupGet(info => info.Id)
-            .Returns(Id.NewId().ToString()!);
+            .Returns(Id.NewId().ToString());
 
         var faker = new Faker();
 

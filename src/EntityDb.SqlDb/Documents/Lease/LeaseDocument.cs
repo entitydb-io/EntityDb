@@ -45,20 +45,17 @@ internal sealed record LeaseDocument : DocumentBase, IEntityDocument<LeaseDocume
         (
             TableName,
             addLeasesCommand.GetLeases()
-                .Select(insertLease =>
+                .Select(insertLease => new LeaseDocument
                 {
-                    return new LeaseDocument
-                    {
-                        TransactionTimeStamp = transaction.TimeStamp,
-                        TransactionId = transaction.Id,
-                        EntityId = transactionCommand.EntityId,
-                        EntityVersionNumber = transactionCommand.EntityVersionNumber,
-                        Scope = insertLease.Scope,
-                        Label = insertLease.Label,
-                        Value = insertLease.Value,
-                        DataType = insertLease.GetType().Name,
-                        Data = envelopeService.Serialize(insertLease)
-                    };
+                    TransactionTimeStamp = transaction.TimeStamp,
+                    TransactionId = transaction.Id,
+                    EntityId = transactionCommand.EntityId,
+                    EntityVersionNumber = transactionCommand.EntityVersionNumber,
+                    Scope = insertLease.Scope,
+                    Label = insertLease.Label,
+                    Value = insertLease.Value,
+                    DataType = insertLease.GetType().Name,
+                    Data = envelopeService.Serialize(insertLease)
                 })
                 .ToArray()
         );

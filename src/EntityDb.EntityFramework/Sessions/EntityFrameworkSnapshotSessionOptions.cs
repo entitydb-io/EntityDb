@@ -11,8 +11,8 @@ public sealed class EntityFrameworkSnapshotSessionOptions
 {
     /// <summary>
     ///     This property is not used by the package. It only provides a convenient way to access
-    ///     the connection string using IOptions, which does not appear to be a convienent thing
-    ///     to do in vanilla Enitity Framework.
+    ///     the connection string using IOptions, which does not appear to be a convenient thing
+    ///     to do in vanilla Entity Framework.
     /// </summary>
     public string ConnectionString { get; set; } = default!;
 

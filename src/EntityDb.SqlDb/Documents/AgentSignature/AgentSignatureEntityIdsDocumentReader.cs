@@ -5,12 +5,12 @@ namespace EntityDb.SqlDb.Documents.AgentSignature;
 
 internal class AgentSignatureEntityIdsDocumentReader : AgentSignatureDocumentReaderBase, IDocumentReader<AgentSignatureDocument>
 {
-    private static readonly string[] _propertyNames =
+    private static readonly string[] PropertyNames =
     {
         nameof(AgentSignatureDocument.EntityIds),
     };
 
-    public AgentSignatureEntityIdsDocumentReader() : base(_propertyNames)
+    public AgentSignatureEntityIdsDocumentReader() : base(PropertyNames)
     {
     }
 
@@ -18,7 +18,7 @@ internal class AgentSignatureEntityIdsDocumentReader : AgentSignatureDocumentRea
     {
         return new AgentSignatureDocument
         {
-            EntityIds = (await dbDataReader.GetFieldValueAsync<Guid[]>(_entityIdsOrdinal))
+            EntityIds = (await dbDataReader.GetFieldValueAsync<Guid[]>(EntityIdsOrdinal, cancellationToken))
                 .Select(guid => new Id(guid))
                 .ToArray()
         };

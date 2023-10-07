@@ -7,7 +7,7 @@ namespace EntityDb.EntityFramework.DbContexts;
 ///     Represents a type used to create instances of <typeparamref name="TDbContext"/>.
 /// </summary>
 /// <typeparam name="TDbContext">The type of the <see cref="DbContext"/>.</typeparam>
-public interface IEntityDbContextFactory<TDbContext>
+public interface IEntityDbContextFactory<out TDbContext>
 {
     internal TDbContext Create(EntityFrameworkSnapshotSessionOptions snapshotSessionOptions);
 

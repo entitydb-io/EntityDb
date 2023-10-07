@@ -6,10 +6,10 @@ namespace EntityDb.EntityFramework.Converters;
 
 internal class TimeStampConverter : ValueConverter<TimeStamp, DateTime>
 {
-    private static readonly Expression<Func<TimeStamp, DateTime>> TimeStampToDateTime = (timeStamp) => timeStamp.Value;
-    private static readonly Expression<Func<DateTime, TimeStamp>> DateTimeToTimeStamp = (dateTime) => new TimeStamp(dateTime);
+    private static readonly Expression<Func<TimeStamp, DateTime>> TimeStampToDateTime = timeStamp => timeStamp.Value;
+    private static readonly Expression<Func<DateTime, TimeStamp>> DateTimeToTimeStamp = dateTime => new TimeStamp(dateTime);
 
-    public TimeStampConverter() : base(TimeStampToDateTime, DateTimeToTimeStamp, null)
+    public TimeStampConverter() : base(TimeStampToDateTime, DateTimeToTimeStamp)
     {
     }
 }

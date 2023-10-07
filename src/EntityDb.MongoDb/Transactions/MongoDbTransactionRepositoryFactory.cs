@@ -2,12 +2,9 @@
 using EntityDb.Common.Disposables;
 using EntityDb.Common.Envelopes;
 using EntityDb.Common.Transactions;
-using EntityDb.MongoDb.Serializers;
 using EntityDb.MongoDb.Sessions;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 
 namespace EntityDb.MongoDb.Transactions;

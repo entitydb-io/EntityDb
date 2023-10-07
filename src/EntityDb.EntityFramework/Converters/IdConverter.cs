@@ -6,10 +6,10 @@ namespace EntityDb.EntityFramework.Converters;
 
 internal class IdConverter : ValueConverter<Id, Guid>
 {
-    private static readonly Expression<Func<Id, Guid>> IdToGuid = (id) => id.Value;
-    private static readonly Expression<Func<Guid, Id>> GuidToId = (guid) => new Id(guid);
+    private static readonly Expression<Func<Id, Guid>> IdToGuid = id => id.Value;
+    private static readonly Expression<Func<Guid, Id>> GuidToId = guid => new Id(guid);
 
-    public IdConverter() : base(IdToGuid, GuidToId, null)
+    public IdConverter() : base(IdToGuid, GuidToId)
     {
     }
 }

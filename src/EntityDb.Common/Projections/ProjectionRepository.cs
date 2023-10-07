@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace EntityDb.Common.Projections;
 
-internal sealed class ProjectionRepository<TProjection> : DisposableResourceBaseClass, IProjectionRepository<TProjection>, ISourceRepository
+internal sealed class ProjectionRepository<TProjection> : DisposableResourceBaseClass, IProjectionRepository<TProjection>
     where TProjection : IProjection<TProjection>
 {
     public ProjectionRepository

@@ -41,12 +41,7 @@ internal class EntityRepository<TEntity> : DisposableResourceBaseClass, IEntityR
 
         var commands = TransactionRepository.EnumerateCommands(commandQuery, cancellationToken);
 
-        var entity = snapshot;
-
-        await foreach (var command in commands)
-        {
-            entity = entity.Reduce(command);
-        }
+        var entity = await commands.AggregateAsync(snapshot, (current, command) => current.Reduce(command), cancellationToken: cancellationToken);
 
         if (!entityPointer.IsSatisfiedBy(entity.GetVersionNumber()))
         {

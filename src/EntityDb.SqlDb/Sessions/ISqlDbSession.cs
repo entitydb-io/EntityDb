@@ -6,7 +6,7 @@ using System.Data.Common;
 
 namespace EntityDb.SqlDb.Sessions;
 
-internal interface ISqlDbSession<TOptions> : IDisposableResource
+internal interface ISqlDbSession<in TOptions> : IDisposableResource
     where TOptions : class
 {
     DbConnection DbConnection { get; }

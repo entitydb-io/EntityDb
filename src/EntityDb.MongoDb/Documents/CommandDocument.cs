@@ -82,8 +82,6 @@ internal sealed record CommandDocument : DocumentBase, IEntityDocument
             .Execute(mongoSession, DocumentQueryExtensions.EntityVersionNumberProjection, cancellationToken)
             .SingleOrDefaultAsync(cancellationToken);
 
-        return document is null
-            ? default
-            : document.EntityVersionNumber;
+        return document?.EntityVersionNumber ?? default;
     }
 }

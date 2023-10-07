@@ -10,7 +10,7 @@ namespace EntityDb.MongoDb.Sessions;
 public sealed class MongoDbTransactionSessionOptions
 {
     /// <summary>
-    ///     A connection string that is compatible with <see cref="MongoClient(string)"/>
+    ///     A connection string that is compatible with <see cref="MongoClient"/>
     /// </summary>
     public string ConnectionString { get; set; } = default!;
 

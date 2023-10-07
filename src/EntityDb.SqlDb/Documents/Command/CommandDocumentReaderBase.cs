@@ -4,12 +4,12 @@ internal abstract class CommandDocumentReaderBase
 {
     private readonly string[] _propertyNames;
 
-    protected readonly int _transactionIdOrdinal;
-    protected readonly int _transactionTimeStampOrdinal;
-    protected readonly int _entityIdOrdinal;
-    protected readonly int _entityVersionNumberOrdinal;
-    protected readonly int _dataTypeOrdinal;
-    protected readonly int _dataOrdinal;
+    protected readonly int TransactionIdOrdinal;
+    protected readonly int TransactionTimeStampOrdinal;
+    protected readonly int EntityIdOrdinal;
+    protected readonly int EntityVersionNumberOrdinal;
+    protected readonly int DataTypeOrdinal;
+    protected readonly int DataOrdinal;
 
     public string[] GetPropertyNames() => _propertyNames;
 
@@ -17,11 +17,11 @@ internal abstract class CommandDocumentReaderBase
     {
         _propertyNames = propertyNames;
 
-        _transactionIdOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.TransactionId));
-        _transactionTimeStampOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.TransactionTimeStamp));
-        _entityIdOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.EntityId));
-        _entityVersionNumberOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.EntityVersionNumber));
-        _dataTypeOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.DataType));
-        _dataOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.Data));
+        TransactionIdOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.TransactionId));
+        TransactionTimeStampOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.TransactionTimeStamp));
+        EntityIdOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.EntityId));
+        EntityVersionNumberOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.EntityVersionNumber));
+        DataTypeOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.DataType));
+        DataOrdinal = Array.IndexOf(_propertyNames, nameof(CommandDocument.Data));
     }
 }

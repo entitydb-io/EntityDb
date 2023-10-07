@@ -36,9 +36,4 @@ internal abstract class SortBuilderBase : BuilderBase, ISortBuilder<SortDefiniti
     {
         return Sort(ascending, DataTypeNameFieldName);
     }
-
-    protected virtual string[] GetHoistedFieldNames()
-    {
-        return Array.Empty<string>();
-    }
 }

@@ -5,12 +5,12 @@ namespace EntityDb.SqlDb.Documents.Lease;
 
 internal class LeaseEntityIdDocumentReader : LeaseDocumentReaderBase, IDocumentReader<LeaseDocument>
 {
-    private static readonly string[] _propertyName =
+    private static readonly string[] PropertyName =
     {
         nameof(LeaseDocument.EntityId),
     };
 
-    public LeaseEntityIdDocumentReader() : base(_propertyName)
+    public LeaseEntityIdDocumentReader() : base(PropertyName)
     {
     }
 
@@ -18,7 +18,7 @@ internal class LeaseEntityIdDocumentReader : LeaseDocumentReaderBase, IDocumentR
     {
         return new LeaseDocument
         {
-            EntityId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(_entityIdOrdinal))
+            EntityId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(EntityIdOrdinal, cancellationToken))
         };
     }
 }

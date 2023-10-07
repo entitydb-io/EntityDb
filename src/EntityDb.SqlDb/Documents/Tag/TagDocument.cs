@@ -44,19 +44,16 @@ internal sealed record TagDocument : DocumentBase, IEntityDocument<TagDocument>
         (
             TableName,
             addTagsCommand.GetTags()
-                .Select(insertTag =>
+                .Select(insertTag => new TagDocument
                 {
-                    return new TagDocument
-                    {
-                        TransactionTimeStamp = transaction.TimeStamp,
-                        TransactionId = transaction.Id,
-                        EntityId = transactionCommand.EntityId,
-                        EntityVersionNumber = transactionCommand.EntityVersionNumber,
-                        Label = insertTag.Label,
-                        Value = insertTag.Value,
-                        DataType = insertTag.GetType().Name,
-                        Data = envelopeService.Serialize(insertTag)
-                    };
+                    TransactionTimeStamp = transaction.TimeStamp,
+                    TransactionId = transaction.Id,
+                    EntityId = transactionCommand.EntityId,
+                    EntityVersionNumber = transactionCommand.EntityVersionNumber,
+                    Label = insertTag.Label,
+                    Value = insertTag.Value,
+                    DataType = insertTag.GetType().Name,
+                    Data = envelopeService.Serialize(insertTag)
                 })
                 .ToArray()
         );

@@ -4,12 +4,12 @@ namespace EntityDb.SqlDb.Documents.Command;
 
 internal class CommandDataDocumentReader : CommandDocumentReaderBase, IDocumentReader<CommandDocument>
 {
-    private static readonly string[] _propertyNames =
+    private static readonly string[] PropertyNames =
     {
         nameof(CommandDocument.Data),
     };
 
-    public CommandDataDocumentReader() : base(_propertyNames)
+    public CommandDataDocumentReader() : base(PropertyNames)
     {
     }
 
@@ -17,7 +17,7 @@ internal class CommandDataDocumentReader : CommandDocumentReaderBase, IDocumentR
     {
         return new CommandDocument
         {
-            Data = await dbDataReader.GetFieldValueAsync<string>(_dataOrdinal)
+            Data = await dbDataReader.GetFieldValueAsync<string>(DataOrdinal, cancellationToken)
         };
     }
 }

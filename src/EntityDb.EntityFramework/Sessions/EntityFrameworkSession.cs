@@ -95,11 +95,11 @@ internal class EntityFrameworkSession<TSnapshot, TDbContext> : DisposableResourc
     {
         AssertNotReadOnly();
 
-        var sapshotExists = await _snapshots
+        var snapshotExists = await _snapshots
             .Where(snapshot.GetKeyPredicate())
             .AnyAsync(cancellationToken);
 
-        if (!sapshotExists)
+        if (!snapshotExists)
         {
             _snapshots.Add(snapshot);
         }

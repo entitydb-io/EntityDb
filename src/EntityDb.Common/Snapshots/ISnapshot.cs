@@ -16,6 +16,12 @@ public interface ISnapshot<TSnapshot>
     static abstract TSnapshot Construct(Id snapshotId);
 
     /// <summary>
+    ///     Creates a copy of a <typeparamref name="TSnapshot" />
+    /// </summary>
+    /// <returns>A copy of a <typeparamref name="TSnapshot" /></returns>
+    TSnapshot Copy();
+
+    /// <summary>
     ///     Returns the id of this snapshot.
     /// </summary>
     /// <returns>The id of this snapshot.</returns>

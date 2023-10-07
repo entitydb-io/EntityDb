@@ -1,6 +1,4 @@
-﻿using EntityDb.Abstractions.Leases;
-using EntityDb.Abstractions.Tags;
-using EntityDb.Abstractions.Transactions;
+﻿using EntityDb.Abstractions.Transactions;
 using EntityDb.Abstractions.Transactions.Builders;
 using EntityDb.Abstractions.ValueObjects;
 using EntityDb.Common.Entities;

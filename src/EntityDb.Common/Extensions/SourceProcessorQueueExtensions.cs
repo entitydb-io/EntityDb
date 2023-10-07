@@ -13,7 +13,7 @@ public static class SourceProcessorQueueExtensions
     ///     Adds a transaction and the corresponding processor to the queue.
     /// </summary>
     /// <typeparam name="TSourceProcessor">The type of the <see cref="ISourceProcessor"/></typeparam>
-    /// <param name="sourceProcessorQueue">The ransaction processor queue</param>
+    /// <param name="sourceProcessorQueue">The transaction processor queue</param>
     /// <param name="source">The transaction to process</param>
     public static void Enqueue<TSourceProcessor>(this ISourceProcessorQueue sourceProcessorQueue, ISource source) where TSourceProcessor : ISourceProcessor
     {

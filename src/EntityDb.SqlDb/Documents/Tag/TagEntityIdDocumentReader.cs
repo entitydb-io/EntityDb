@@ -5,12 +5,12 @@ namespace EntityDb.SqlDb.Documents.Tag;
 
 internal class TagEntityIdDocumentReader : TagDocumentReaderBase, IDocumentReader<TagDocument>
 {
-    private static readonly string[] _propertyNames =
+    private static readonly string[] PropertyNames =
     {
         nameof(TagDocument.EntityId),
     };
 
-    public TagEntityIdDocumentReader() : base(_propertyNames)
+    public TagEntityIdDocumentReader() : base(PropertyNames)
     {
     }
 
@@ -18,7 +18,7 @@ internal class TagEntityIdDocumentReader : TagDocumentReaderBase, IDocumentReade
     {
         return new TagDocument
         {
-            EntityId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(_entityIdOrdinal))
+            EntityId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(EntityIdOrdinal, cancellationToken))
         };
     }
 }

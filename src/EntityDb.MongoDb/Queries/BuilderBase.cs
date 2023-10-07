@@ -8,7 +8,4 @@ internal abstract class BuilderBase
 {
     protected const string DataTypeNameFieldName =
         $"{nameof(DocumentBase.Data)}.{nameof(Envelope<BsonDocument>.Headers)}.{EnvelopeHelper.Type}";
-
-    protected const string DataValueFieldName =
-        $"{nameof(DocumentBase.Data)}.{nameof(Envelope<BsonDocument>.Value)}";
 }

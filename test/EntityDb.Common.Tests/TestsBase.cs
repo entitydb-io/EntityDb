@@ -14,8 +14,6 @@ using EntityDb.Common.Tests.Implementations.Projections;
 using EntityDb.Common.Tests.Implementations.Snapshots;
 using EntityDb.EntityFramework.Extensions;
 using EntityDb.EntityFramework.Sessions;
-using EntityDb.InMemory.Extensions;
-using EntityDb.InMemory.Sessions;
 using EntityDb.MongoDb.Extensions;
 using EntityDb.MongoDb.Queries;
 using EntityDb.MongoDb.Sessions;
@@ -24,14 +22,12 @@ using EntityDb.Npgsql.Queries;
 using EntityDb.Redis.Extensions;
 using EntityDb.Redis.Sessions;
 using EntityDb.SqlDb.Sessions;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using Moq;
 using Shouldly;
-using Testcontainers.MongoDb;
 using Xunit.Abstractions;
 using Xunit.DependencyInjection;
 using Xunit.DependencyInjection.Logging;
@@ -227,36 +223,36 @@ public class TestsBase<TStartup>
         });
     }
 
-    private static SnapshotAdder InMemorySnapshotAdder<TSnapshot>()
-        where TSnapshot : class, ISnapshotWithTestLogic<TSnapshot>
-    {
-        return new SnapshotAdder($"InMemory<{typeof(TSnapshot).Name}>", typeof(TSnapshot), serviceCollection =>
-        {
-            serviceCollection.AddInMemorySnapshots<TSnapshot>(true);
-
-            serviceCollection.Configure<InMemorySnapshotSessionOptions>(TestSessionOptions.Write, options =>
-            {
-                options.ReadOnly = false;
-            });
-
-            serviceCollection.Configure<InMemorySnapshotSessionOptions>(TestSessionOptions.ReadOnly, options =>
-            {
-                options.ReadOnly = true;
-            });
-
-            serviceCollection.Configure<InMemorySnapshotSessionOptions>(TestSessionOptions.ReadOnlySecondaryPreferred, options =>
-            {
-                options.ReadOnly = true;
-            });
-        });
-    }
+    // private static SnapshotAdder InMemorySnapshotAdder<TSnapshot>()
+    //     where TSnapshot : class, ISnapshotWithTestLogic<TSnapshot>
+    // {
+    //     return new SnapshotAdder($"InMemory<{typeof(TSnapshot).Name}>", typeof(TSnapshot), serviceCollection =>
+    //     {
+    //         serviceCollection.AddInMemorySnapshots<TSnapshot>(true);
+    //
+    //         serviceCollection.Configure<InMemorySnapshotSessionOptions>(TestSessionOptions.Write, options =>
+    //         {
+    //             options.ReadOnly = false;
+    //         });
+    //
+    //         serviceCollection.Configure<InMemorySnapshotSessionOptions>(TestSessionOptions.ReadOnly, options =>
+    //         {
+    //             options.ReadOnly = true;
+    //         });
+    //
+    //         serviceCollection.Configure<InMemorySnapshotSessionOptions>(TestSessionOptions.ReadOnlySecondaryPreferred, options =>
+    //         {
+    //             options.ReadOnly = true;
+    //         });
+    //     });
+    // }
 
     private static IEnumerable<SnapshotAdder> AllSnapshotAdders<TSnapshot>()
         where TSnapshot : class, ISnapshotWithTestLogic<TSnapshot>
     {
         yield return EntityFrameworkSnapshotAdder<TSnapshot>();
         yield return RedisSnapshotAdder<TSnapshot>();
-        yield return InMemorySnapshotAdder<TSnapshot>();
+        //yield return InMemorySnapshotAdder<TSnapshot>();
     }
 
     private static EntityAdder GetEntityAdder<TEntity>()

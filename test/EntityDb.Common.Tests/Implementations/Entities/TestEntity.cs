@@ -20,6 +20,11 @@ public record TestEntity : IEntity<TestEntity>, ISnapshotWithTestLogic<TestEntit
         };
     }
 
+    public TestEntity Copy()
+    {
+        return this with { };
+    }
+
     public static void Configure(EntityTypeBuilder<TestEntity> testEntityBuilder)
     {
         testEntityBuilder

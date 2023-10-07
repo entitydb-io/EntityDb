@@ -5,7 +5,7 @@ namespace EntityDb.SqlDb.Documents.Lease;
 
 internal class LeaseDocumentReader : LeaseDocumentReaderBase, IDocumentReader<LeaseDocument>
 {
-    private static readonly string[] _propertyNames =
+    private static readonly string[] PropertyNames =
     {
         nameof(LeaseDocument.TransactionId),
         nameof(LeaseDocument.TransactionTimeStamp),
@@ -18,7 +18,7 @@ internal class LeaseDocumentReader : LeaseDocumentReaderBase, IDocumentReader<Le
         nameof(LeaseDocument.Value),
     };
 
-    public LeaseDocumentReader() : base(_propertyNames)
+    public LeaseDocumentReader() : base(PropertyNames)
     {
     }
 
@@ -26,15 +26,15 @@ internal class LeaseDocumentReader : LeaseDocumentReaderBase, IDocumentReader<Le
     {
         return new LeaseDocument
         {
-            TransactionId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(_transactionIdOrdinal)),
-            TransactionTimeStamp = new TimeStamp(await dbDataReader.GetFieldValueAsync<DateTime>(_transactionTimeStampOrdinal)),
-            EntityId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(_entityIdOrdinal)),
-            EntityVersionNumber = new VersionNumber(Convert.ToUInt64(await dbDataReader.GetFieldValueAsync<long>(_entityVersionNumberOrdinal))),
-            DataType = await dbDataReader.GetFieldValueAsync<string>(_dataTypeOrdinal),
-            Data = await dbDataReader.GetFieldValueAsync<string>(_dataOrdinal),
-            Scope = await dbDataReader.GetFieldValueAsync<string>(_scopeOrdinal),
-            Label = await dbDataReader.GetFieldValueAsync<string>(_labelOrdinal),
-            Value = await dbDataReader.GetFieldValueAsync<string>(_valueOrdinal),
+            TransactionId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(TransactionIdOrdinal, cancellationToken)),
+            TransactionTimeStamp = new TimeStamp(await dbDataReader.GetFieldValueAsync<DateTime>(TransactionTimeStampOrdinal, cancellationToken)),
+            EntityId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(EntityIdOrdinal, cancellationToken)),
+            EntityVersionNumber = new VersionNumber(Convert.ToUInt64(await dbDataReader.GetFieldValueAsync<long>(EntityVersionNumberOrdinal, cancellationToken))),
+            DataType = await dbDataReader.GetFieldValueAsync<string>(DataTypeOrdinal, cancellationToken),
+            Data = await dbDataReader.GetFieldValueAsync<string>(DataOrdinal, cancellationToken),
+            Scope = await dbDataReader.GetFieldValueAsync<string>(ScopeOrdinal, cancellationToken),
+            Label = await dbDataReader.GetFieldValueAsync<string>(LabelOrdinal, cancellationToken),
+            Value = await dbDataReader.GetFieldValueAsync<string>(ValueOrdinal, cancellationToken),
         };
     }
 }

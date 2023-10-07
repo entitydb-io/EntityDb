@@ -1,5 +1,4 @@
-﻿using EntityDb.Common.Sources.Processors;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace EntityDb.Common.Sources.Processors.Queues;

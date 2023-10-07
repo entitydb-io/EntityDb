@@ -19,7 +19,7 @@ internal class SqlDbSession<TOptions> : DisposableResourceBaseClass,
     private readonly ISqlConverter<TOptions> _sqlConverter;
     private readonly SqlDbTransactionSessionOptions _options;
 
-    private DbTransaction? _dbTransaction = default!;
+    private DbTransaction? _dbTransaction;
 
     public DbConnection DbConnection { get; }
 
@@ -83,7 +83,7 @@ internal class SqlDbSession<TOptions> : DisposableResourceBaseClass,
     public async IAsyncEnumerable<TDocument> Find<TDocument>
     (
         IDocumentReader<TDocument> documentReader,
-        IFilterDefinition filterDefintiion,
+        IFilterDefinition filterDefinition,
         ISortDefinition? sortDefinition,
         int? skip,
         int? limit,
@@ -94,7 +94,7 @@ internal class SqlDbSession<TOptions> : DisposableResourceBaseClass,
     {
         var tableName = TDocument.TableName;
 
-        var dbQuery = _sqlConverter.ConvertQuery(tableName, documentReader, filterDefintiion, sortDefinition, skip, limit, options);
+        var dbQuery = _sqlConverter.ConvertQuery(tableName, documentReader, filterDefinition, sortDefinition, skip, limit, options);
 
         dbQuery.Connection = DbConnection;
         dbQuery.Transaction = _dbTransaction;
@@ -113,7 +113,7 @@ internal class SqlDbSession<TOptions> : DisposableResourceBaseClass,
 
         await dbQuery.PrepareAsync(cancellationToken);
 
-        using var reader = await dbQuery.ExecuteReaderAsync(cancellationToken);
+        await using var reader = await dbQuery.ExecuteReaderAsync(cancellationToken);
 
         while (await reader.ReadAsync(cancellationToken))
         {

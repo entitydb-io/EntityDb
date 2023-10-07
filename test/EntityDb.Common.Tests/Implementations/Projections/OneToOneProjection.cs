@@ -16,14 +16,24 @@ namespace EntityDb.Common.Tests.Implementations.Projections;
 public class OneToOneProjection : IProjection<OneToOneProjection>, ISnapshotWithTestLogic<OneToOneProjection>
 {
     public required Id Id { get; set; }
-    public TimeStamp LastTransactionAt { get; set; }
     public VersionNumber VersionNumber { get; set; }
+    public TimeStamp LastTransactionAt { get; set; }
 
     public static OneToOneProjection Construct(Id projectionId)
     {
         return new OneToOneProjection
         { 
             Id = projectionId,
+        };
+    }
+
+    public OneToOneProjection Copy()
+    {
+        return new OneToOneProjection
+        {
+            Id = Id,
+            VersionNumber = VersionNumber,
+            LastTransactionAt = LastTransactionAt,
         };
     }
 
@@ -107,7 +117,7 @@ public class OneToOneProjection : IProjection<OneToOneProjection>, ISnapshotWith
         {
             foreach (var command in transaction.Commands)
             {
-                if (command.Data is not IReducer<OneToOneProjection>)
+                if (command.Data is not IMutator<OneToOneProjection>)
                 {
                     continue;
                 }

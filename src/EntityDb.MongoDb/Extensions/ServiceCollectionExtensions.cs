@@ -2,7 +2,6 @@
 using EntityDb.Common.Extensions;
 using EntityDb.MongoDb.Envelopes;
 using EntityDb.MongoDb.Transactions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EntityDb.MongoDb.Extensions;

@@ -5,7 +5,7 @@ using System.Data.Common;
 
 namespace EntityDb.SqlDb.Converters;
 
-internal interface ISqlConverter<TOptions>
+internal interface ISqlConverter<in TOptions>
 {
     string SqlType { get; }
 

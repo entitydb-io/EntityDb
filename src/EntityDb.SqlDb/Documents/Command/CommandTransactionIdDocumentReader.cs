@@ -5,12 +5,12 @@ namespace EntityDb.SqlDb.Documents.Command;
 
 internal class CommandTransactionIdDocumentReader : CommandDocumentReaderBase, IDocumentReader<CommandDocument>
 {
-    private static readonly string[] _propertyNames =
+    private static readonly string[] PropertyNames =
     {
         nameof(CommandDocument.TransactionId),
     };
 
-    public CommandTransactionIdDocumentReader() : base(_propertyNames)
+    public CommandTransactionIdDocumentReader() : base(PropertyNames)
     {
     }
 
@@ -18,7 +18,7 @@ internal class CommandTransactionIdDocumentReader : CommandDocumentReaderBase, I
     {
         return new CommandDocument
         {
-            TransactionId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(_transactionIdOrdinal))
+            TransactionId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(TransactionIdOrdinal, cancellationToken))
         };
     }
 }

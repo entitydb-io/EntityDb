@@ -5,7 +5,7 @@ namespace EntityDb.SqlDb.Documents.Tag;
 
 internal class TagDocumentReader : TagDocumentReaderBase, IDocumentReader<TagDocument>
 {
-    private static readonly string[] _propertyNames =
+    private static readonly string[] PropertyNames =
     {
         nameof(TagDocument.TransactionId),
         nameof(TagDocument.TransactionTimeStamp),
@@ -17,7 +17,7 @@ internal class TagDocumentReader : TagDocumentReaderBase, IDocumentReader<TagDoc
         nameof(TagDocument.Value),
     };
 
-    public TagDocumentReader() : base(_propertyNames)
+    public TagDocumentReader() : base(PropertyNames)
     {
     }
 
@@ -25,14 +25,14 @@ internal class TagDocumentReader : TagDocumentReaderBase, IDocumentReader<TagDoc
     {
         return new TagDocument
         {
-            TransactionId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(_transactionIdOrdinal)),
-            TransactionTimeStamp = new TimeStamp(await dbDataReader.GetFieldValueAsync<DateTime>(_transactionTimeStampOrdinal)),
-            EntityId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(_entityIdOrdinal)),
-            EntityVersionNumber = new VersionNumber(Convert.ToUInt64(await dbDataReader.GetFieldValueAsync<long>(_entityVersionNumberOrdinal))),
-            DataType = await dbDataReader.GetFieldValueAsync<string>(_dataTypeOrdinal),
-            Data = await dbDataReader.GetFieldValueAsync<string>(_dataOrdinal),
-            Label = await dbDataReader.GetFieldValueAsync<string>(_labelOrdinal),
-            Value = await dbDataReader.GetFieldValueAsync<string>(_valueOrdinal),
+            TransactionId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(TransactionIdOrdinal, cancellationToken)),
+            TransactionTimeStamp = new TimeStamp(await dbDataReader.GetFieldValueAsync<DateTime>(TransactionTimeStampOrdinal, cancellationToken)),
+            EntityId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(EntityIdOrdinal, cancellationToken)),
+            EntityVersionNumber = new VersionNumber(Convert.ToUInt64(await dbDataReader.GetFieldValueAsync<long>(EntityVersionNumberOrdinal, cancellationToken))),
+            DataType = await dbDataReader.GetFieldValueAsync<string>(DataTypeOrdinal, cancellationToken),
+            Data = await dbDataReader.GetFieldValueAsync<string>(DataOrdinal, cancellationToken),
+            Label = await dbDataReader.GetFieldValueAsync<string>(LabelOrdinal, cancellationToken),
+            Value = await dbDataReader.GetFieldValueAsync<string>(ValueOrdinal, cancellationToken),
         };
     }
 }

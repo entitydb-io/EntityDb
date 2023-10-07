@@ -7,7 +7,7 @@ namespace EntityDb.EntityFramework.DbContexts;
 ///     A type of a <see cref="DbContext"/> that can be used for EntityDb purposes.
 /// </summary>
 /// <typeparam name="TDbContext">The type of the <see cref="DbContext"/></typeparam>
-public interface IEntityDbContext<TDbContext>
+public interface IEntityDbContext<out TDbContext>
     where TDbContext : DbContext, IEntityDbContext<TDbContext>
 {
     /// <summary>

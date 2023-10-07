@@ -3,7 +3,6 @@ using EntityDb.Common.Extensions;
 using EntityDb.EntityFramework.DbContexts;
 using EntityDb.EntityFramework.Snapshots;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics.CodeAnalysis;
 

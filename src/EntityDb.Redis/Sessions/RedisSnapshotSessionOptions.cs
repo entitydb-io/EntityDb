@@ -15,7 +15,7 @@ public sealed class RedisSnapshotSessionOptions
     public string ConnectionString { get; set; } = default!;
 
     /// <summary>
-    ///     Choose a key namspace for snapshots. Snapshots are stored with keys in the following format:
+    ///     Choose a key namespace for snapshots. Snapshots are stored with keys in the following format:
     ///     <c>{KeyNamespace}#{SnapshotId}@{SnapshotVersionNumber}</c>
     /// </summary>
     public string KeyNamespace { get; set; } = default!;

@@ -10,7 +10,7 @@ public class SnapshotReferenceTypeConfiguration<TSnapshot> : IEntityTypeConfigur
     private readonly string _snapshotReferencesTableName;
 
     /// <summary>
-    ///     Configure the napshot Reference Type.
+    ///     Configure the snapshot Reference Type.
     /// </summary>
     /// <param name="snapshotReferencesTableName">The name of the table for snapshot references.</param>
     public SnapshotReferenceTypeConfiguration(string snapshotReferencesTableName)

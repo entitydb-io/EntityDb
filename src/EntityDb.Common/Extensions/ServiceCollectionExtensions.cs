@@ -43,7 +43,7 @@ public static class ServiceCollectionExtensions
     }
 
     /// <ignore />
-    [Obsolete("Please register your TTransactionProcessor yourself. You may use any scope you want. You will need to call services.AddSourceProcessorQueue(), and you may enqueue source processing by injecting ISourceProcessorQueue and calling Enqueue. There is a generci extension method available if you don't want to implement ISourceProcessorQueueItem.", true)]
+    [Obsolete("Please register your TTransactionProcessor yourself. You may use any scope you want. You will need to call services.AddSourceProcessorQueue(), and you may enqueue source processing by injecting ISourceProcessorQueue and calling Enqueue. There is a generic extension method available if you don't want to implement ISourceProcessorQueueItem.", true)]
     public static void AddTransactionProcessorSubscriber<TTransactionProcessor>(this IServiceCollection serviceCollection,
         bool testMode, Func<IServiceProvider, TTransactionProcessor> transactionProcessorFactory)
     {
@@ -56,7 +56,7 @@ public static class ServiceCollectionExtensions
     ///     For non-test mode, the queue uses a buffer block.
     /// </summary>
     /// <param name="serviceCollection">The service collection.</param>
-    /// <param name="testMode">Wether or not to run in test mode.</param>
+    /// <param name="testMode">Whether or not to run in test mode.</param>
     [ExcludeFromCodeCoverage(Justification = "Tests are only meant to run in test mode.")]
     public static void AddSourceProcessorQueue(this IServiceCollection serviceCollection,
         bool testMode)
@@ -79,12 +79,12 @@ public static class ServiceCollectionExtensions
 
     /// <summary>
     ///     Registers a queue for re-processing sources (e.g., transactions) after they have
-    ///     already been commited (and potentially processed before). For test mode, the queue is
+    ///     already been committed (and potentially processed before). For test mode, the queue is
     ///     not actually a queue and will immediately reprocess sources. For non-test mode, the
     ///     queue uses a buffer block.
     /// </summary>
     /// <param name="serviceCollection">The service collection.</param>
-    /// <param name="testMode">Wether or not to run in test mode.</param>
+    /// <param name="testMode">Whether or not to run in test mode.</param>
     [ExcludeFromCodeCoverage(Justification = "Tests are only meant to run in test mode.")]
     public static void AddSourceReprocessorQueue(this IServiceCollection serviceCollection, bool testMode = false)
     {

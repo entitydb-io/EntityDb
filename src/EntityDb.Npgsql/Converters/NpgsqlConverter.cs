@@ -9,7 +9,6 @@ using EntityDb.SqlDb.Queries.Definitions.Sort;
 using Npgsql;
 using NpgsqlTypes;
 using System.Collections;
-using System.Data;
 using System.Data.Common;
 using System.Text;
 
@@ -35,7 +34,7 @@ internal class NpgsqlConverter : ISqlConverter<NpgsqlQueryOptions>
         return $"{eqFilterDefinition.PropertyName} = {parameterName}";
     }
 
-    private static string GetInFitler(InFilterDefinition inFilterDefinition, NpgsqlParameterCollection parameters)
+    private static string GetInFilter(InFilterDefinition inFilterDefinition, NpgsqlParameterCollection parameters)
     {
         var parameterNames = AddParameters(parameters, inFilterDefinition.PropertyName, inFilterDefinition.PropertyValues);
 
@@ -70,20 +69,20 @@ internal class NpgsqlConverter : ISqlConverter<NpgsqlQueryOptions>
             AndFilterDefinition andFilterDefinition => string.Join
             (
                 " AND ",
-                andFilterDefinition.FilterDefinitions.Select(filterDefinition => GetFilter(filterDefinition, parameters))
+                andFilterDefinition.FilterDefinitions.Select(innerFilterDefinition => GetFilter(innerFilterDefinition, parameters))
             ),
 
             OrFilterDefinition orFilterDefinition => string.Join
             (
                 " OR ",
-                orFilterDefinition.FilterDefinitions.Select(filterDefinition => GetFilter(filterDefinition, parameters))
+                orFilterDefinition.FilterDefinitions.Select(innerFilterDefinition => GetFilter(innerFilterDefinition, parameters))
             ),
 
             NotFilterDefinition notFilterDefinition => $"NOT {GetFilter(notFilterDefinition.FilterDefinition, parameters)}",
 
             EqFilterDefinition eqFilterDefinition => GetEqFilter(eqFilterDefinition, parameters),
 
-            InFilterDefinition inFilterDefinition => GetInFitler(inFilterDefinition, parameters),
+            InFilterDefinition inFilterDefinition => GetInFilter(inFilterDefinition, parameters),
 
             AnyInFilterDefinition anyInFilterDefinition => GetAnyInFilter(anyInFilterDefinition, parameters),
 
@@ -130,7 +129,7 @@ internal class NpgsqlConverter : ISqlConverter<NpgsqlQueryOptions>
             CombineSortDefinition combineSortDefinition => string.Join
             (
                 ", ",
-                combineSortDefinition.SortDefinitions.Select(sortDefinition => GetSort(tableName, options, sortDefinition))
+                combineSortDefinition.SortDefinitions.Select(innerSortDefinition => GetSort(tableName, options, innerSortDefinition))
             ),
 
             AscSortDefinition ascSortDefinition => GetAscSort(tableName, options, ascSortDefinition),

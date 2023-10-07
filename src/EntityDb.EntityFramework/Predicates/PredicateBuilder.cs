@@ -1,5 +1,4 @@
-﻿using EntityDb.EntityFramework.Snapshots;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace EntityDb.EntityFramework.Predicates;
 

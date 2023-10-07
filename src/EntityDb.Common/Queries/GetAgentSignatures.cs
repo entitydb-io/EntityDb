@@ -12,7 +12,7 @@ internal sealed record GetAgentSignatures(Id[] TransactionIds) : IAgentSignature
         return builder.SourceIdIn(TransactionIds);
     }
 
-    public TSort? GetSort<TSort>(IAgentSignatureSortBuilder<TSort> builder)
+    public TSort GetSort<TSort>(IAgentSignatureSortBuilder<TSort> builder)
     {
         return builder.SourceTimeStamp(true);
     }

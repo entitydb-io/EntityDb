@@ -88,9 +88,7 @@ internal sealed record CommandDocument : DocumentBase, IEntityDocument<CommandDo
             .Execute(sqlDbSession, EntityVersionNumberDocumentReader, cancellationToken)
             .SingleOrDefaultAsync(cancellationToken);
 
-        return document is null
-            ? default
-            : document.EntityVersionNumber;
+        return document?.EntityVersionNumber ?? default;
     }
 
     public Dictionary<string, object> ToDictionary()

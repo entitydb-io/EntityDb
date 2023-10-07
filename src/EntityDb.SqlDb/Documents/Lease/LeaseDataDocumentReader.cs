@@ -4,12 +4,12 @@ namespace EntityDb.SqlDb.Documents.Lease;
 
 internal class LeaseDataDocumentReader : LeaseDocumentReaderBase, IDocumentReader<LeaseDocument>
 {
-    private static readonly string[] _propertyNames =
+    private static readonly string[] PropertyNames =
     {
         nameof(LeaseDocument.Data),
     };
 
-    public LeaseDataDocumentReader() : base(_propertyNames)
+    public LeaseDataDocumentReader() : base(PropertyNames)
     {
     }
 
@@ -17,7 +17,7 @@ internal class LeaseDataDocumentReader : LeaseDocumentReaderBase, IDocumentReade
     {
         return new LeaseDocument
         {
-            Data = await dbDataReader.GetFieldValueAsync<string>(_dataOrdinal)
+            Data = await dbDataReader.GetFieldValueAsync<string>(DataOrdinal, cancellationToken)
         };
     }
 }

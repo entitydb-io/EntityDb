@@ -4,7 +4,6 @@ using EntityDb.Common.Extensions;
 using EntityDb.Json.Envelopes;
 using EntityDb.Redis.ConnectionMultiplexers;
 using EntityDb.Redis.Snapshots;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics.CodeAnalysis;
 

@@ -7,7 +7,6 @@ using EntityDb.Npgsql.Queries;
 using EntityDb.Npgsql.Transactions;
 using EntityDb.SqlDb.Converters;
 using EntityDb.SqlDb.Extensions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EntityDb.Npgsql.Extensions;

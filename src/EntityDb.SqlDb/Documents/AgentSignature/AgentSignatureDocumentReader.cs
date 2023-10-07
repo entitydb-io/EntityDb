@@ -5,7 +5,7 @@ namespace EntityDb.SqlDb.Documents.AgentSignature;
 
 internal class AgentSignatureDocumentReader : AgentSignatureDocumentReaderBase, IDocumentReader<AgentSignatureDocument>
 {
-    private static readonly string[] _propertyNames =
+    private static readonly string[] PropertyNames =
     {
         nameof(AgentSignatureDocument.TransactionId),
         nameof(AgentSignatureDocument.TransactionTimeStamp),
@@ -14,7 +14,7 @@ internal class AgentSignatureDocumentReader : AgentSignatureDocumentReaderBase, 
         nameof(AgentSignatureDocument.Data),
     };
 
-    public AgentSignatureDocumentReader() : base(_propertyNames)
+    public AgentSignatureDocumentReader() : base(PropertyNames)
     {
     }
 
@@ -22,13 +22,13 @@ internal class AgentSignatureDocumentReader : AgentSignatureDocumentReaderBase, 
     {
         return new AgentSignatureDocument
         {
-            TransactionId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(_transactionIdOrdinal)),
-            TransactionTimeStamp = new TimeStamp(await dbDataReader.GetFieldValueAsync<DateTime>(_transactionTimeStampOrdinal)),
-            EntityIds = (await dbDataReader.GetFieldValueAsync<Guid[]>(_entityIdsOrdinal))
+            TransactionId = new Id(await dbDataReader.GetFieldValueAsync<Guid>(TransactionIdOrdinal, cancellationToken)),
+            TransactionTimeStamp = new TimeStamp(await dbDataReader.GetFieldValueAsync<DateTime>(TransactionTimeStampOrdinal, cancellationToken)),
+            EntityIds = (await dbDataReader.GetFieldValueAsync<Guid[]>(EntityIdsOrdinal, cancellationToken))
                 .Select(guid => new Id(guid))
                 .ToArray(),
-            DataType = await dbDataReader.GetFieldValueAsync<string>(_dataTypeOrdinal),
-            Data = await dbDataReader.GetFieldValueAsync<string>(_dataOrdinal),
+            DataType = await dbDataReader.GetFieldValueAsync<string>(DataTypeOrdinal, cancellationToken),
+            Data = await dbDataReader.GetFieldValueAsync<string>(DataOrdinal, cancellationToken),
         };
     }
 }
