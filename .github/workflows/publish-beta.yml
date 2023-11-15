@@ -60,7 +60,7 @@ jobs:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: ./TestResults/**/*.xml
       - name: Generate Coverage Report
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.1.12
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.2.0
         with:
           reports: './TestResults/**/coverage.opencover.xml'
           targetdir: 'CoverageReport'
